@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  # tmgenius-emotion:
+  #   image: emotion-recognition:1.0.0
+  #   container_name: emotion_container
+  #   ports:
+  #     - "${EMOTION_RECOGNITION_PORT:-8081}:8000"
+
+  tmgenius-agent:
+    image: mindie1.0:300i-duo
+    container_name: tmgenius-agent
+    ports:
+      - "${LLM_AGENT_PORT:-8082}:1025"
+    shm_size: 1g
+    working_dir: /home
+    devices:
+      - /dev/davinci2
+      - /dev/davinci_manager
+      - /dev/hisi_hdc
+      - /dev/devmm_svm
+    volumes:
+      - /usr/local/Ascend/driver:/usr/local/Ascend/driver:ro
+      - /usr/local/dcmi:/usr/local/dcmi:ro
+      - /usr/local/bin/npu-smi:/usr/local/bin/npu-smi:ro
+      - /usr/local/sbin/:/usr/local/sbin:ro
+      - weights/Qwen2.5-7B-Instruct:/home/weights/Qwen2.5-7B-Instruct:ro
+      - config/tmgenius-agent_300i-duo.json:/usr/local/Ascend/mindie/latest/mindie-service/conf/config.json
+    command: source /usr/local/Ascend/mindie/latest/mindie-service/set_env.sh && /usr/local/Ascend/mindie/latest/mindie-service/bin/mindieservice_daemon

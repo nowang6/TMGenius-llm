@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+images/*.tar
+
+weights/Qwen2.5-7B-Instruct
+weights/Qwen2.5-VL-7B-Instruct
+
