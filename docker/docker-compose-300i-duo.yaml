@@ -24,6 +24,6 @@ services:
       - /usr/local/dcmi:/usr/local/dcmi:ro
       - /usr/local/bin/npu-smi:/usr/local/bin/npu-smi:ro
       - /usr/local/sbin/:/usr/local/sbin:ro
-      - weights/Qwen2.5-7B-Instruct:/home/weights/Qwen2.5-7B-Instruct:ro
-      - config/tmgenius-agent_300i-duo.json:/usr/local/Ascend/mindie/latest/mindie-service/conf/config.json
+      - ./weights/Qwen2.5-7B-Instruct:/home/weights/Qwen2.5-7B-Instruct:ro
+      - ./config/tmgenius-agent_300i-duo.json:/usr/local/Ascend/mindie/latest/mindie-service/conf/config.json
     command: source /usr/local/Ascend/mindie/latest/mindie-service/set_env.sh && /usr/local/Ascend/mindie/latest/mindie-service/bin/mindieservice_daemon
